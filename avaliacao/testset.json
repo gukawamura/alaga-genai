@@ -1,0 +1,16 @@
+[
+  { "id": "t01", "pergunta": "O que eu faço se meu carro ficar preso na água?", "tipo": "fundamentada", "gold_ids": ["c03", "c02"], "resposta_esperada": "Abandonar o veículo, sair pela janela se as portas não abrirem, ir para local alto e não ligar o motor submerso." },
+  { "id": "t02", "pergunta": "Posso atravessar uma rua alagada a pé?", "tipo": "fundamentada", "gold_ids": ["c01"], "resposta_esperada": "Não; a partir de 15 cm de água em movimento a correnteza derruba um adulto." },
+  { "id": "t03", "pergunta": "Qual o telefone da Defesa Civil?", "tipo": "fundamentada", "gold_ids": ["c07"], "resposta_esperada": "Defesa Civil 199 (Bombeiros 193, SAMU 192)." },
+  { "id": "t04", "pergunta": "O que significa risco crítico no aplicativo?", "tipo": "fundamentada", "gold_ids": ["c10"], "resposta_esperada": "Não sair de casa; se estiver na rua, procurar local alto e seguro." },
+  { "id": "t05", "pergunta": "A partir de quanta chuva o risco é considerado alto?", "tipo": "fundamentada", "gold_ids": ["c09"], "resposta_esperada": "De 10 a 25 mm/h é alto; acima de 25 mm/h é crítico." },
+  { "id": "t06", "pergunta": "O que fazer antes da chuva para evitar alagamento?", "tipo": "fundamentada", "gold_ids": ["c04"], "resposta_esperada": "Não jogar lixo em bueiros, limpar calhas, montar kit de emergência e se cadastrar em alertas." },
+  { "id": "t07", "pergunta": "A água entrou em casa, o que faço com a energia elétrica?", "tipo": "fundamentada", "gold_ids": ["c05"], "resposta_esperada": "Desligar a energia no quadro geral e não tocar em fios ou aparelhos molhados." },
+  { "id": "t08", "pergunta": "Depois do alagamento posso comer a comida que molhou?", "tipo": "fundamentada", "gold_ids": ["c06"], "resposta_esperada": "Não; descartar alimentos que tocaram a água da enchente." },
+  { "id": "t09", "pergunta": "Quais são os sintomas de leptospirose?", "tipo": "fundamentada", "gold_ids": ["c12"], "resposta_esperada": "Febre, dores musculares (panturrilha), dor de cabeça e vermelhidão nos olhos." },
+  { "id": "t10", "pergunta": "Quais bairros o Alaga Alerta monitora?", "tipo": "fundamentada", "gold_ids": ["c11"], "resposta_esperada": "Lapa, Vila Maria, Jaguaré, Ipiranga, Vila Prudente, Santo Amaro, Jardim Ângela, Penha, Pinheiros e Butantã." },
+  { "id": "t11", "pergunta": "Qual a previsão do tempo para o Rio de Janeiro amanhã?", "tipo": "recusa", "gold_ids": [], "resposta_esperada": "Não consta — fora do escopo (previsão de outra cidade)." },
+  { "id": "t12", "pergunta": "Quanto custa o seguro do meu carro?", "tipo": "recusa", "gold_ids": [], "resposta_esperada": "Não consta — assunto fora do domínio de alagamentos." },
+  { "id": "t13", "pergunta": "Quem ganhou o Campeonato Brasileiro de 2025?", "tipo": "recusa", "gold_ids": [], "resposta_esperada": "Não consta — assunto fora do domínio." },
+  { "id": "t14", "pergunta": "Qual o horário de funcionamento da prefeitura?", "tipo": "recusa", "gold_ids": [], "resposta_esperada": "Não consta — informação não presente na base." }
+]

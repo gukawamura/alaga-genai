@@ -1,0 +1,16 @@
+# Segredos
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Modelos / cache de embeddings
+.cache/
+models/
+
+# Saídas regeneráveis (mantenha placar.json versionado; remova se preferir)
+# avaliacao/erros.json

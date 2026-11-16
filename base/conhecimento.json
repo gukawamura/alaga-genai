@@ -1,0 +1,100 @@
+[
+  {
+    "id": "c01",
+    "texto": "Nunca atravesse uma rua alagada a pé. A partir de 15 cm de água em movimento, a correnteza é capaz de derrubar e arrastar um adulto. Procure um caminho alternativo em local mais alto e aguarde a água baixar.",
+    "fonte": "Defesa Civil — Orientações sobre alagamentos",
+    "licenca": "Conteúdo público (Governo)",
+    "url": "https://www.defesacivil.sp.gov.br"
+  },
+  {
+    "id": "c02",
+    "texto": "Não tente atravessar alagamentos de carro. Cerca de 30 cm de água podem fazer o veículo flutuar e ser arrastado. Se a água estiver subindo, abandone o carro e vá imediatamente para um ponto elevado.",
+    "fonte": "Defesa Civil — Orientações sobre alagamentos",
+    "licenca": "Conteúdo público (Governo)",
+    "url": "https://www.defesacivil.sp.gov.br"
+  },
+  {
+    "id": "c03",
+    "texto": "Se o seu carro ficar preso na água: mantenha a calma, não ligue o motor se ele já estiver submerso e saia do veículo. Se as portas não abrirem por causa da pressão da água, saia pela janela. Priorize sua vida, não os pertences.",
+    "fonte": "Corpo de Bombeiros — Resgate em enchentes",
+    "licenca": "Conteúdo público (Governo)",
+    "url": "https://www.bombeiros.sp.gov.br"
+  },
+  {
+    "id": "c04",
+    "texto": "Antes da chuva, previna alagamentos: não descarte lixo em bueiros e sarjetas, limpe calhas e ralos, monte um kit de emergência (lanterna, documentos em saco plástico, água e remédios) e cadastre-se para receber alertas da Defesa Civil.",
+    "fonte": "Defesa Civil — Prevenção",
+    "licenca": "Conteúdo público (Governo)",
+    "url": "https://www.defesacivil.sp.gov.br"
+  },
+  {
+    "id": "c05",
+    "texto": "Se a água entrar em casa, desligue a energia elétrica no quadro geral e não toque em fios ou aparelhos molhados — há risco de choque. Levante móveis e eletrodomésticos e, se a água subir rápido, saia para um local seguro e mais alto.",
+    "fonte": "Defesa Civil — Durante o alagamento",
+    "licenca": "Conteúdo público (Governo)",
+    "url": "https://www.defesacivil.sp.gov.br"
+  },
+  {
+    "id": "c06",
+    "texto": "Após o alagamento, descarte alimentos e remédios que entraram em contato com a água da enchente. Limpe pisos e paredes com solução de água sanitária. A água de enchente pode transmitir doenças como a leptospirose.",
+    "fonte": "Secretaria de Saúde — Pós-enchente",
+    "licenca": "Conteúdo público (Governo)",
+    "url": "https://www.saude.sp.gov.br"
+  },
+  {
+    "id": "c07",
+    "texto": "Telefones de emergência em São Paulo: Defesa Civil 199, Corpo de Bombeiros 193 e SAMU 192. Ligue em caso de risco à vida, pessoas ilhadas ou necessidade de resgate.",
+    "fonte": "Defesa Civil — Contatos de emergência",
+    "licenca": "Conteúdo público (Governo)",
+    "url": "https://www.defesacivil.sp.gov.br"
+  },
+  {
+    "id": "c08",
+    "texto": "O CGE (Centro de Gerenciamento de Emergências) de São Paulo classifica a cidade em estados: observação, atenção, alerta e alerta máximo. O estado de atenção ou superior indica possibilidade de alagamentos e exige cautela no deslocamento.",
+    "fonte": "CGE São Paulo — Estados de atenção",
+    "licenca": "Conteúdo público (Governo)",
+    "url": "https://www.cgesp.org"
+  },
+  {
+    "id": "c09",
+    "texto": "No Alaga Alerta, o risco de alagamento por bairro é calculado pela precipitação horária: abaixo de 2 mm/h é risco normal; de 2 a 10 mm/h é atenção; de 10 a 25 mm/h é alto; a partir de 25 mm/h é crítico.",
+    "fonte": "Alaga Alerta — Camada Ouro (Big Data)",
+    "licenca": "Projeto Alaga Alerta",
+    "url": "https://github.com/equipe/alaga-alerta-big-data"
+  },
+  {
+    "id": "c10",
+    "texto": "O que fazer em cada nível de risco do app: normal, circule normalmente; atenção, evite áreas baixas e próximas a córregos; alto, evite deslocamentos não essenciais; crítico, não saia de casa e, se já estiver na rua, procure um local alto e seguro.",
+    "fonte": "Alaga Alerta — Guia de níveis de risco",
+    "licenca": "Projeto Alaga Alerta",
+    "url": "https://github.com/equipe/alaga-alerta"
+  },
+  {
+    "id": "c11",
+    "texto": "Os bairros monitorados pelo Alaga Alerta foram escolhidos por histórico de alagamento, por ficarem às margens dos rios Tietê e Pinheiros ou próximos a córregos: Lapa, Vila Maria, Jaguaré, Ipiranga, Vila Prudente, Santo Amaro, Jardim Ângela, Penha, Pinheiros e Butantã.",
+    "fonte": "Alaga Alerta — Bairros monitorados",
+    "licenca": "Projeto Alaga Alerta",
+    "url": "https://github.com/equipe/alaga-alerta"
+  },
+  {
+    "id": "c12",
+    "texto": "A leptospirose é transmitida pelo contato com água de enchente contaminada pela urina de ratos. Os sintomas incluem febre, dores musculares (principalmente na panturrilha), dor de cabeça e vermelhidão nos olhos. Procure um posto de saúde se tiver tido contato com água de enchente e apresentar esses sinais.",
+    "fonte": "Secretaria de Saúde — Leptospirose",
+    "licenca": "Conteúdo público (Governo)",
+    "url": "https://www.saude.sp.gov.br"
+  },
+  {
+    "id": "c13",
+    "texto": "Idosos e pessoas com mobilidade reduzida devem ter um plano de evacuação definido com antecedência e avisar vizinhos ou familiares em caso de risco. Em alerta máximo, peça ajuda cedo — não espere a água subir para sair.",
+    "fonte": "Defesa Civil — Grupos vulneráveis",
+    "licenca": "Conteúdo público (Governo)",
+    "url": "https://www.defesacivil.sp.gov.br"
+  },
+  {
+    "id": "c14",
+    "texto": "Guarde documentos e objetos de valor em sacos plásticos vedados e leve-os com você ao evacuar. Nunca volte para uma área alagada para buscar pertences enquanto a água não baixar e a Defesa Civil não liberar o acesso.",
+    "fonte": "Defesa Civil — Evacuação",
+    "licenca": "Conteúdo público (Governo)",
+    "url": "https://www.defesacivil.sp.gov.br"
+  }
+]

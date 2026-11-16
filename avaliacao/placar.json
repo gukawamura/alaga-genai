@@ -1,0 +1,27 @@
+{
+  "busca": {
+    "recall@1": 1.0,
+    "recall@3": 1.0,
+    "limiar": 0.84
+  },
+  "placar": [
+    {
+      "config": "sem_contexto",
+      "acerto_fundamentada": 0.0,
+      "recusa_correta": 0.0,
+      "taxa_alucinacao": 1.0
+    },
+    {
+      "config": "rag_simples",
+      "acerto_fundamentada": 0.4,
+      "recusa_correta": 1.0,
+      "taxa_alucinacao": 0.429
+    },
+    {
+      "config": "rag_agente",
+      "acerto_fundamentada": 1.0,
+      "recusa_correta": 1.0,
+      "taxa_alucinacao": 0.0
+    }
+  ]
+}
