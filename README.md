@@ -104,7 +104,7 @@ cobrem os padrões distintos:
 
 - Repositório (este): https://github.com/gukawamura/alaga-genai
 - Repositório Big Data (Ouro que alimenta a base): https://github.com/gukawamura/alaga-big-data
-- Vídeo: _TODO — colar o link do YouTube (não listado) após a gravação_
+- Vídeo: https://youtu.be/qi57GOOAfyo
 
 ---
 
