@@ -8,8 +8,7 @@ Alaga Alerta · GenAI · Geração nas 3 configurações (itens 04, 05, 06)
 
 Todas retornam JSON válido: {"resposta": str, "fonte": str|null, "recusa": bool}  (item 04)
 
-Modelo via variável de ambiente OLLAMA_MODEL (default llama3.1:8b). Para máquina
-modesta, basta: set OLLAMA_MODEL=llama3.2:3b  (Windows) — sem tocar no código.
+Modelo via variável de ambiente OLLAMA_MODEL (default llama3.2:3b).
 """
 from __future__ import annotations
 
@@ -21,7 +20,7 @@ import requests
 from rag import BaseConhecimento, LIMIAR_BUSCA
 
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.1:8b")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2:3b")
 
 RECUSA_PADRAO = {"resposta": "Não consta na minha base de conhecimento.", "fonte": None, "recusa": True}
 
@@ -42,17 +41,17 @@ def _chamar_ollama(prompt: str, system: str = "", temperatura: float = 0.0) -> d
     )
     r.raise_for_status()
     try:
-        return json.loads(r.json()["response"])
-    except (json.JSONDecodeError, KeyError):
-        return dict(RECUSA_PADRAO)
+        dados = json.loads(r.json()["response"])
+        return dados if isinstance(dados, dict) else {}
+    except (ValueError, KeyError, TypeError):
+        return {}
 
 
 def _normalizar(d: dict) -> dict:
-    return {
-        "resposta": str(d.get("resposta", RECUSA_PADRAO["resposta"])),
-        "fonte": d.get("fonte") or None,
-        "recusa": bool(d.get("recusa", False)),
-    }
+    resposta, fonte = d.get("resposta"), d.get("fonte")
+    if d.get("recusa") is not False or not isinstance(resposta, str) or not resposta.strip():
+        return dict(RECUSA_PADRAO)
+    return {"resposta": resposta.strip(), "fonte": fonte.strip() if isinstance(fonte, str) and fonte.strip() else None, "recusa": False}
 
 
 SYSTEM_ASSISTENTE = (
@@ -104,7 +103,8 @@ def _reformular(pergunta: str) -> str:
         f"sobre alagamentos, mantendo o sentido. Pergunta: {pergunta}\n"
         'Responda em JSON: {"reformulada": "..."}',
     )
-    return d.get("reformulada") or pergunta
+    consulta = d.get("reformulada")
+    return consulta.strip() if isinstance(consulta, str) and consulta.strip() else pergunta
 
 
 def rag_agente(pergunta: str, base: BaseConhecimento, k: int = 3) -> dict:
@@ -122,15 +122,20 @@ def rag_agente(pergunta: str, base: BaseConhecimento, k: int = 3) -> dict:
     prompt = (
         f"Contexto:\n{contexto}\n\n"
         f"Pergunta do cidadão: {pergunta}\n\n"
-        "Responda USANDO SOMENTE o contexto. Em 'fonte', copie exatamente a fonte do trecho "
-        "usado. Se o contexto não responder, recuse (recusa=true, fonte=null)."
+        "Responda USANDO SOMENTE o contexto. Em 'fonte', escreva somente o ID do trecho que "
+        "sustenta sua resposta, por exemplo c01, sem colchetes. "
+        "Se o contexto não responder, recuse (recusa=true, fonte=null)."
     )
     resp = _normalizar(_chamar_ollama(prompt, SYSTEM_ASSISTENTE))
 
-    # Passo 4: autoverificação — a fonte citada tem que existir nos trechos recuperados
-    fontes_validas = {t["fonte"] for t in trechos}
-    if not resp["recusa"] and resp["fonte"] not in fontes_validas:
-        resp["fonte"] = trechos[0]["fonte"]  # ancora na fonte mais relevante recuperada
+    # Passo 4: valida a referência escolhida pelo modelo antes de citar o trecho.
+    if resp["recusa"]:
+        return resp
+    fontes = {t["id"]: t["fonte"] for t in trechos}
+    fonte = fontes.get((resp["fonte"] or "").strip("[]").lower())
+    if fonte is None:
+        return dict(RECUSA_PADRAO)
+    resp["fonte"] = fonte
     return resp
 
 

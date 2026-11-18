@@ -29,10 +29,10 @@
   },
   {
     "id": "c05",
-    "texto": "Se a água entrar em casa, desligue a energia elétrica no quadro geral e não toque em fios ou aparelhos molhados — há risco de choque. Levante móveis e eletrodomésticos e, se a água subir rápido, saia para um local seguro e mais alto.",
+    "texto": "Se a água entrar em casa, não toque em fios ou aparelhos molhados. Desligue a energia no quadro geral apenas se puder fazer isso com segurança, de um local seco e sem atravessar a água. Caso contrário, afaste-se e acione a companhia elétrica.",
     "fonte": "Defesa Civil — Durante o alagamento",
     "licenca": "Conteúdo público (Governo)",
-    "url": "https://www.defesacivil.sp.gov.br"
+    "url": "https://portais.santoandre.sp.gov.br/defesacivil/inundacoes/"
   },
   {
     "id": "c06",
@@ -57,24 +57,24 @@
   },
   {
     "id": "c09",
-    "texto": "No Alaga Alerta, o risco de alagamento por bairro é calculado pela precipitação horária: abaixo de 2 mm/h é risco normal; de 2 a 10 mm/h é atenção; de 10 a 25 mm/h é alto; a partir de 25 mm/h é crítico.",
+    "texto": "Na camada Ouro histórica do Alaga Alerta, a precipitação horária abaixo de 2 mm/h é normal, de 2 até menos de 10 mm/h é atenção, de 10 até menos de 25 mm/h é alto e a partir de 25 mm/h é crítico.",
     "fonte": "Alaga Alerta — Camada Ouro (Big Data)",
     "licenca": "Projeto Alaga Alerta",
-    "url": "https://github.com/equipe/alaga-alerta-big-data"
+    "url": "https://github.com/gukawamura/alaga-big-data/blob/main/databricks/03_ouro.py"
   },
   {
     "id": "c10",
     "texto": "O que fazer em cada nível de risco do app: normal, circule normalmente; atenção, evite áreas baixas e próximas a córregos; alto, evite deslocamentos não essenciais; crítico, não saia de casa e, se já estiver na rua, procure um local alto e seguro.",
     "fonte": "Alaga Alerta — Guia de níveis de risco",
     "licenca": "Projeto Alaga Alerta",
-    "url": "https://github.com/equipe/alaga-alerta"
+    "url": "https://github.com/gukawamura/alaga-alerta-mvp"
   },
   {
     "id": "c11",
-    "texto": "Os bairros monitorados pelo Alaga Alerta foram escolhidos por histórico de alagamento, por ficarem às margens dos rios Tietê e Pinheiros ou próximos a córregos: Lapa, Vila Maria, Jaguaré, Ipiranga, Vila Prudente, Santo Amaro, Jardim Ângela, Penha, Pinheiros e Butantã.",
-    "fonte": "Alaga Alerta — Bairros monitorados",
+    "texto": "A camada Ouro histórica do Alaga Alerta cobre dez bairros: Lapa, Vila Maria, Jaguaré, Ipiranga, Vila Prudente, Santo Amaro, Jardim Ângela, Penha, Pinheiros e Butantã.",
+    "fonte": "Alaga Alerta — Dimensão de bairros (Big Data)",
     "licenca": "Projeto Alaga Alerta",
-    "url": "https://github.com/equipe/alaga-alerta"
+    "url": "https://github.com/gukawamura/alaga-big-data/blob/main/config/bairros.json"
   },
   {
     "id": "c12",

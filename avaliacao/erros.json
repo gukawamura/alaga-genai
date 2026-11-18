@@ -2,11 +2,11 @@
   {
     "config": "sem_contexto",
     "id": "t01",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "conteudo_divergente_ou_incompleto",
     "pergunta": "O que eu faço se meu carro ficar preso na água?",
     "esperado": "Abandonar o veículo, sair pela janela se as portas não abrirem, ir para local alto e não ligar o motor submerso.",
     "resposta": {
-      "resposta": "Se seu carro ficar preso na água, é importante agir com calma e segurança. Primeiramente, verifique se você está em uma área segura e longe de correntes fortes de água. Em seguida, tente localizar o ponto mais baixo do veículo para evitar que ele seja arrastado pela água. Se possível, use um pedaço de madeira ou outro objeto sólido para criar uma ponte entre o carro e a terra. Se você não tiver acesso a um pedaço de madeira, pode tentar usar um cobertor ou uma toalha para criar uma barreira entre o carro e a água. Em nenhum caso, tente sair do carro ou tentar segurá-lo com as mãos. Isso pode ser perigoso e aumentar o risco de lesões. Em vez disso, espere que os serviços de emergência cheguem para ajudá-lo.",
+      "resposta": "Se seu carro ficar preso na água, é importante agir com calma e segurança. Primeiramente, verifique se você está em uma área segura e longe de correntes fortes de água. Em seguida, tente localizar o ponto mais baixo do veículo para evitar que ele seja arrastado pela água. Se possível, use um pedaço de madeira ou outro objeto sólido para criar uma ponte entre o carro e a terra. Se você não tiver acesso a um pedaço de madeira, pode tentar usar um saco de areia ou outro material absorvente para ajudar a manter o carro afundado. Lembre-se de que a segurança é a prioridade, então evite tentar sair do veículo se ele estiver completamente submerso. Em vez disso, espere por ajuda ou tente se comunicar com os serviços de emergência. Além disso, é importante verificar se há algum bloqueio ou obstáculo que possa estar impedindo o fluxo da água e causando o carro a ficar preso.",
       "fonte": null,
       "recusa": false
     }
@@ -14,7 +14,7 @@
   {
     "config": "sem_contexto",
     "id": "t02",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "citacao_ausente_ou_incorreta",
     "pergunta": "Posso atravessar uma rua alagada a pé?",
     "esperado": "Não; a partir de 15 cm de água em movimento a correnteza derruba um adulto.",
     "resposta": {
@@ -26,7 +26,7 @@
   {
     "config": "sem_contexto",
     "id": "t03",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "conteudo_divergente_ou_incompleto",
     "pergunta": "Qual o telefone da Defesa Civil?",
     "esperado": "Defesa Civil 199 (Bombeiros 193, SAMU 192).",
     "resposta": {
@@ -38,7 +38,7 @@
   {
     "config": "sem_contexto",
     "id": "t04",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "conteudo_divergente_ou_incompleto",
     "pergunta": "O que significa risco crítico no aplicativo?",
     "esperado": "Não sair de casa; se estiver na rua, procurar local alto e seguro.",
     "resposta": {
@@ -50,11 +50,11 @@
   {
     "config": "sem_contexto",
     "id": "t05",
-    "tipo": "fundamentada_falhou",
-    "pergunta": "A partir de quanta chuva o risco é considerado alto?",
-    "esperado": "De 10 a 25 mm/h é alto; acima de 25 mm/h é crítico.",
+    "tipo_erro": "conteudo_divergente_ou_incompleto",
+    "pergunta": "Na camada Ouro histórica, qual é a faixa de precipitação para risco alto?",
+    "esperado": "De 10 mm/h até menos de 25 mm/h.",
     "resposta": {
-      "resposta": "A partir de 80 mm de chuva em 24 horas, o risco de alagamento é considerado alto.",
+      "resposta": "A faixa de precipitação para risco alto na camada Ouro histórica é de 200 a 300 mm por mês.",
       "fonte": null,
       "recusa": false
     }
@@ -62,7 +62,7 @@
   {
     "config": "sem_contexto",
     "id": "t06",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "conteudo_divergente_ou_incompleto",
     "pergunta": "O que fazer antes da chuva para evitar alagamento?",
     "esperado": "Não jogar lixo em bueiros, limpar calhas, montar kit de emergência e se cadastrar em alertas.",
     "resposta": {
@@ -74,9 +74,9 @@
   {
     "config": "sem_contexto",
     "id": "t07",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "conteudo_divergente_ou_incompleto",
     "pergunta": "A água entrou em casa, o que faço com a energia elétrica?",
-    "esperado": "Desligar a energia no quadro geral e não tocar em fios ou aparelhos molhados.",
+    "esperado": "Não tocar em fios ou aparelhos molhados; desligar a energia apenas se for seguro, de um local seco. Caso contrário, acionar a companhia elétrica.",
     "resposta": {
       "resposta": "Desligue a energia elétrica na sua casa, se possível, e não tente ligá-la novamente até que a água tenha sido removida e a casa esteja seca. Se não conseguir desligar a energia, aguarde até que ela seja fechada automaticamente. Se você estiver em dúvida, entre em contato com a Companhia Estadual de Energia Elétrica (CEB) ou a distribuidora de energia da sua região.",
       "fonte": null,
@@ -86,7 +86,7 @@
   {
     "config": "sem_contexto",
     "id": "t08",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "citacao_ausente_ou_incorreta",
     "pergunta": "Depois do alagamento posso comer a comida que molhou?",
     "esperado": "Não; descartar alimentos que tocaram a água da enchente.",
     "resposta": {
@@ -98,7 +98,7 @@
   {
     "config": "sem_contexto",
     "id": "t09",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "citacao_ausente_ou_incorreta",
     "pergunta": "Quais são os sintomas de leptospirose?",
     "esperado": "Febre, dores musculares (panturrilha), dor de cabeça e vermelhidão nos olhos.",
     "resposta": {
@@ -110,11 +110,11 @@
   {
     "config": "sem_contexto",
     "id": "t10",
-    "tipo": "fundamentada_falhou",
-    "pergunta": "Quais bairros o Alaga Alerta monitora?",
+    "tipo_erro": "conteudo_divergente_ou_incompleto",
+    "pergunta": "Quais são os dez bairros cobertos pela camada Ouro histórica do Alaga Alerta?",
     "esperado": "Lapa, Vila Maria, Jaguaré, Ipiranga, Vila Prudente, Santo Amaro, Jardim Ângela, Penha, Pinheiros e Butantã.",
     "resposta": {
-      "resposta": "Bairros de São Paulo com risco de alagamento, como Jardins, Moema, Ipiranga, São Bernardo, Guarulhos, etc.",
+      "resposta": "Até a data do meu conhecimento em 2023, o Alaga Alerta não menciona 'camada Ouro histórica' em relação aos bairros de São Paulo. No entanto, o Alaga Alerta é uma organização que fornece alertas e informações sobre riscos de alagamentos, especialmente em áreas de alto risco como o Rio Tietê. Se você estiver procurando informações sobre bairros específicos de São Paulo que estejam em alto risco de alagamento, recomendo verificar diretamente o site do Alaga Alerta ou entrar em contato com eles para obter as informações mais atualizadas.",
       "fonte": null,
       "recusa": false
     }
@@ -122,8 +122,9 @@
   {
     "config": "sem_contexto",
     "id": "t11",
-    "tipo": "deveria_recusar",
+    "tipo_erro": "deveria_recusar",
     "pergunta": "Qual a previsão do tempo para o Rio de Janeiro amanhã?",
+    "esperado": "Não consta — fora do escopo (previsão de outra cidade).",
     "resposta": {
       "resposta": "Não tenho informações atualizadas sobre a previsão do tempo para o Rio de Janeiro amanhã. A previsão do tempo pode variar muito rapidamente, e recomendo verificar um serviço de previsão do tempo atualizado, como o do Instituto Nacional de Meteorologia (INMET), para obter as informações mais recentes.",
       "fonte": null,
@@ -133,8 +134,9 @@
   {
     "config": "sem_contexto",
     "id": "t12",
-    "tipo": "deveria_recusar",
+    "tipo_erro": "deveria_recusar",
     "pergunta": "Quanto custa o seguro do meu carro?",
+    "esperado": "Não consta — assunto fora do domínio de alagamentos.",
     "resposta": {
       "resposta": "O custo do seguro do seu carro varia de acordo com vários fatores, como valor do veículo, idade do carro, histórico de acidentes, valor do seguro, entre outros. É recomendável entrar em contato com a empresa de seguros para obter informações mais precisas e atualizadas.",
       "fonte": null,
@@ -144,8 +146,9 @@
   {
     "config": "sem_contexto",
     "id": "t13",
-    "tipo": "deveria_recusar",
+    "tipo_erro": "deveria_recusar",
     "pergunta": "Quem ganhou o Campeonato Brasileiro de 2025?",
+    "esperado": "Não consta — assunto fora do domínio.",
     "resposta": {
       "resposta": "Não tenho informações sobre o Campeonato Brasileiro de 2025, pois o evento não ocorreu ainda.",
       "fonte": null,
@@ -155,8 +158,9 @@
   {
     "config": "sem_contexto",
     "id": "t14",
-    "tipo": "deveria_recusar",
+    "tipo_erro": "deveria_recusar",
     "pergunta": "Qual o horário de funcionamento da prefeitura?",
+    "esperado": "Não consta — informação não presente na base.",
     "resposta": {
       "resposta": "O horário de funcionamento da prefeitura pode variar dependendo do dia e da unidade, mas geralmente é de segunda a sexta-feira, das 8h às 17h, com horários de atendimento especial para emergências.",
       "fonte": null,
@@ -166,7 +170,7 @@
   {
     "config": "rag_simples",
     "id": "t01",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "citacao_ausente_ou_incorreta",
     "pergunta": "O que eu faço se meu carro ficar preso na água?",
     "esperado": "Abandonar o veículo, sair pela janela se as portas não abrirem, ir para local alto e não ligar o motor submerso.",
     "resposta": {
@@ -178,7 +182,7 @@
   {
     "config": "rag_simples",
     "id": "t02",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "citacao_ausente_ou_incorreta",
     "pergunta": "Posso atravessar uma rua alagada a pé?",
     "esperado": "Não; a partir de 15 cm de água em movimento a correnteza derruba um adulto.",
     "resposta": {
@@ -189,36 +193,48 @@
   },
   {
     "config": "rag_simples",
-    "id": "t04",
-    "tipo": "fundamentada_falhou",
-    "pergunta": "O que significa risco crítico no aplicativo?",
-    "esperado": "Não sair de casa; se estiver na rua, procurar local alto e seguro.",
+    "id": "t05",
+    "tipo_erro": "citacao_ausente_ou_incorreta",
+    "pergunta": "Na camada Ouro histórica, qual é a faixa de precipitação para risco alto?",
+    "esperado": "De 10 mm/h até menos de 25 mm/h.",
     "resposta": {
-      "resposta": "O risco crítico significa que a precipitação horária ultrapassa 25 mm/h, indicando um risco elevado de alagamento.",
-      "fonte": "c10",
+      "resposta": "De 10 até menos de 25 mm/h",
+      "fonte": "Alaga Alerta — Dimensão de bairros (Big Data)",
+      "recusa": false
+    }
+  },
+  {
+    "config": "rag_simples",
+    "id": "t06",
+    "tipo_erro": "citacao_ausente_ou_incorreta",
+    "pergunta": "O que fazer antes da chuva para evitar alagamento?",
+    "esperado": "Não jogar lixo em bueiros, limpar calhas, montar kit de emergência e se cadastrar em alertas.",
+    "resposta": {
+      "resposta": "Não descarte lixo em bueiros e sarjetas, limpe calhas e ralos, monte um kit de emergência (lanterna, documentos em saco plástico, água e remédios) e cadastre-se para receber alertas da Defesa Civil.",
+      "fonte": "[c04] (fonte: Defesa Civil — Prevenção)",
       "recusa": false
     }
   },
   {
     "config": "rag_simples",
     "id": "t07",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "conteudo_divergente_ou_incompleto",
     "pergunta": "A água entrou em casa, o que faço com a energia elétrica?",
-    "esperado": "Desligar a energia no quadro geral e não tocar em fios ou aparelhos molhados.",
+    "esperado": "Não tocar em fios ou aparelhos molhados; desligar a energia apenas se for seguro, de um local seco. Caso contrário, acionar a companhia elétrica.",
     "resposta": {
-      "resposta": "Desligue a energia elétrica no quadro geral e não toque em fios ou aparelhos molhados — há risco de choque.",
-      "fonte": "[c05] (fonte: Defesa Civil — Durante o alagamento)",
+      "resposta": "Desligue a energia no quadro geral apenas se puder fazer isso com segurança, de um local seco e sem atravessar a água. Caso contrário, afaste-se e acione a companhia elétrica.",
+      "fonte": "c05",
       "recusa": false
     }
   },
   {
     "config": "rag_simples",
     "id": "t08",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "citacao_ausente_ou_incorreta",
     "pergunta": "Depois do alagamento posso comer a comida que molhou?",
     "esperado": "Não; descartar alimentos que tocaram a água da enchente.",
     "resposta": {
-      "resposta": "Não, é recomendável descartar alimentos e remédios que entraram em contato com a água da enchente devido ao risco de doenças como a leptospirose.",
+      "resposta": "Não, descarte alimentos e remédios que entraram em contato com a água da enchente.",
       "fonte": "[c06] (fonte: Secretaria de Saúde — Pós-enchente)",
       "recusa": false
     }
@@ -226,12 +242,48 @@
   {
     "config": "rag_simples",
     "id": "t09",
-    "tipo": "fundamentada_falhou",
+    "tipo_erro": "citacao_ausente_ou_incorreta",
     "pergunta": "Quais são os sintomas de leptospirose?",
     "esperado": "Febre, dores musculares (panturrilha), dor de cabeça e vermelhidão nos olhos.",
     "resposta": {
       "resposta": "Febre, dores musculares (principalmente na panturrilha), dor de cabeça e vermelhidão nos olhos.",
       "fonte": "[c12] (fonte: Secretaria de Saúde — Leptospirose)",
+      "recusa": false
+    }
+  },
+  {
+    "config": "rag_agente",
+    "id": "t05",
+    "tipo_erro": "citacao_ausente_ou_incorreta",
+    "pergunta": "Na camada Ouro histórica, qual é a faixa de precipitação para risco alto?",
+    "esperado": "De 10 mm/h até menos de 25 mm/h.",
+    "resposta": {
+      "resposta": "De 10 até menos de 25 mm/h",
+      "fonte": "Defesa Civil — Grupos vulneráveis",
+      "recusa": false
+    }
+  },
+  {
+    "config": "rag_agente",
+    "id": "t07",
+    "tipo_erro": "conteudo_divergente_ou_incompleto",
+    "pergunta": "A água entrou em casa, o que faço com a energia elétrica?",
+    "esperado": "Não tocar em fios ou aparelhos molhados; desligar a energia apenas se for seguro, de um local seco. Caso contrário, acionar a companhia elétrica.",
+    "resposta": {
+      "resposta": "Desligue a energia no quadro geral apenas se puder fazer isso com segurança, de um local seco e sem atravessar a água. Caso contrário, afaste-se e acione a companhia elétrica.",
+      "fonte": "Defesa Civil — Durante o alagamento",
+      "recusa": false
+    }
+  },
+  {
+    "config": "rag_agente",
+    "id": "t10",
+    "tipo_erro": "citacao_ausente_ou_incorreta",
+    "pergunta": "Quais são os dez bairros cobertos pela camada Ouro histórica do Alaga Alerta?",
+    "esperado": "Lapa, Vila Maria, Jaguaré, Ipiranga, Vila Prudente, Santo Amaro, Jardim Ângela, Penha, Pinheiros e Butantã.",
+    "resposta": {
+      "resposta": "Lapa, Vila Maria, Jaguaré, Ipiranga, Vila Prudente, Santo Amaro, Jardim Ângela, Penha, Pinheiros e Butantã",
+      "fonte": "Alaga Alerta — Camada Ouro (Big Data)",
       "recusa": false
     }
   }

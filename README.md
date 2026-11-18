@@ -1,12 +1,11 @@
 # Alaga Alerta — Componente **Inteligência** (Generative AI for Engineering)
 
-Assistente que responde o cidadão sobre risco e segurança em alagamentos
-("o que faço se meu carro ficar preso na água?", "essa rua costuma alagar?"),
-com base em manuais da Defesa Civil / boletins do CGE e nos dados da camada Ouro,
+Assistente que responde a perguntas sobre segurança em alagamentos
+("o que faço se meu carro ficar preso na água?", "qual o telefone da Defesa Civil?"),
+com base em orientações públicas, nos estados de atenção do CGE e em um recorte da camada Ouro histórica,
 **citando a fonte** e dizendo **"não consta"** quando não sabe.
 
-Prova central da disciplina: uma LLM local **acerta mais e alucina menos** com
-RAG + agente do que o mesmo modelo sem contexto.
+O projeto compara uma LLM local em três configurações usando o mesmo conjunto de perguntas.
 
 ---
 
@@ -21,13 +20,13 @@ RAG + agente do que o mesmo modelo sem contexto.
 
 | Campo | Valor |
 |---|---|
-| Tarefa da IA | QA fundamentado (RAG) sobre segurança em alagamentos |
+| Tarefa da IA | Perguntas e respostas fundamentadas (RAG) sobre segurança em alagamentos |
 | Entrada | Pergunta do cidadão (texto), via chat do MVP |
 | Saída | JSON `{resposta, fonte, recusa}` |
 | Modelo | Llama 3.2 3B local (Ollama), configurável via `OLLAMA_MODEL`; embeddings `multilingual-e5-small` |
-| Base | Manuais Defesa Civil/Bombeiros/Saúde, CGE e camada Ouro (Big Data) |
+| Base | Orientações de Defesa Civil, Bombeiros e Saúde, estados de atenção do CGE e recorte histórico da Ouro |
 | Integração | `POST /assistente` consumido pelo chat do MVP |
-| LGPD | Nenhum dado pessoal é enviado ao modelo |
+| LGPD | O MVP encaminha somente a pergunta e filtra padrões de CPF, e-mail e telefone. O filtro tem alcance limitado. Os testes usam perguntas sem dados pessoais. |
 
 ## 3. Diagrama do pipeline de IA e dos documentos
 
@@ -37,73 +36,96 @@ Documentos (Defesa Civil, CGE, Saúde, Ouro)
         ▼
  base/conhecimento.json ──► embeddings e5 (normalizados)
                                    │
-Pergunta do cidadão ──► [agente] reformula ──► busca cosseno (top-k)
+Chat do MVP ──► POST /assistente na API central ──► filtro de dados pessoais
+        │
+        └──► API GenAI local ──► [agente] reformula ──► busca cosseno (top-3)
                                    │
                     score < limiar(0.84)? ── sim ─► "não consta" (recusa)
                                    │ não
                                    ▼
-                    Llama 3.1 8B (JSON, cita a fonte) ──► autoverificação da fonte
+                    Llama 3.2 3B no Ollama ──► confere o ID de trecho citado
                                    │
                                    ▼
-                        POST /assistente ──► chat do MVP
+                        JSON ──► API central ──► chat do MVP
 ```
 
 ## 4. Tabela da base de conhecimento
 
 | Fonte | Formato | Licença | Trechos |
 |---|---|---|---|
-| Defesa Civil (orientações/prevenção/evacuação) | texto curado | Conteúdo público (Governo) | 8 |
-| Corpo de Bombeiros | texto curado | Conteúdo público (Governo) | 1 |
-| Secretaria de Saúde (pós-enchente, leptospirose) | texto curado | Conteúdo público (Governo) | 2 |
-| CGE São Paulo (estados de atenção) | texto curado | Conteúdo público (Governo) | 1 |
-| Alaga Alerta — camada Ouro (Big Data) | texto curado | Projeto | 2 |
+| Defesa Civil (orientações/prevenção/evacuação) | resumo da equipe em JSON | Site público, licença específica não identificada | 7 |
+| Corpo de Bombeiros | resumo da equipe em JSON | Site público, licença específica não identificada | 1 |
+| Secretaria de Saúde (pós-enchente, leptospirose) | resumo da equipe em JSON | Site público, licença específica não identificada | 2 |
+| CGE São Paulo (estados de atenção) | resumo da equipe em JSON | Site público, licença específica não identificada | 1 |
+| Alaga Alerta — camada Ouro histórica e guia de risco | texto curado | Projeto | 3 |
 | **Total** | | | **14** |
 
 ## 5. Performance nas 3 configurações
 
-Execução real com `python avaliacao/avaliar.py` (modelo `llama3.2:3b`, 14 casos: 10
-fundamentadas + 4 de recusa). Saídas em `avaliacao/placar.json` e `avaliacao/erros.json`.
+Executamos o mesmo modelo, `llama3.2:3b`, com temperatura 0 nas três
+configurações. A especialização foi implementada como agente de RAG, mantendo os
+pesos originais do modelo. São 14 perguntas, com 10 gabaritos de conteúdo e 4
+casos em que se espera uma recusa. O teste, as 42 respostas e os erros estão
+em `avaliacao/testset.json`, `avaliacao/placar.json` e `avaliacao/erros.json`.
 
-| Configuração | Acerto (fundamentada) | Recusa correta | Taxa de alucinação |
-|---|---|---|---|
-| sem_contexto | 0.00 | 0.00 | **1.00** |
-| rag_simples  | 0.40 | 1.00 | 0.43 |
-| rag_agente   | **1.00** | **1.00** | **0.00** |
+- **Acerto de conteúdo** mede a presença dos conceitos obrigatórios do gabarito
+  nas 10 perguntas fundamentadas. Os critérios de cada pergunta estão no JSON.
+- **Acerto fundamentado** exige acerto de conteúdo e citação correspondente a
+  um dos trechos esperados. O agente valida o ID do trecho escolhido pelo
+  modelo antes de devolver a fonte.
+- **Recusa correta** conta quantos dos 4 casos sem resposta foram recusados.
+- **Respostas divergentes** contam, entre os 14 casos, as respostas com
+  conteúdo divergente ou incompleto e as respostas a perguntas que deveriam
+  ser recusadas. É um indicador de risco de alucinação. O teste por padrões
+  pode perder paráfrases e afirmações inventadas que apareçam junto com a
+  resposta correta. Erros só de citação e recusas indevidas são registrados
+  separadamente em `erros.json`.
 
-Busca: **recall@1 = 1.00**, **recall@3 = 1.00**. Limiar de recusa = **0.84**,
-escolhido porque nos testes os trechos relevantes ficam ≥ 0.84 (ex.: 0.886 / 0.884 / 0.857
-para uma pergunta no domínio) e perguntas fora de domínio caem abaixo — o que separa
-"responder fundamentado" de "não consta".
+| Configuração | Acerto de conteúdo | Acerto fundamentado | Recusa correta | Respostas divergentes |
+|---|---:|---:|---:|---:|
+| Sem contexto | 3/10 | 0/10 | 0/4 | 11/14 |
+| RAG simples | 9/10 | 3/10 | 4/4 | 1/14 |
+| RAG com agente | 9/10 | 7/10 | 4/4 | 1/14 |
 
-> Leitura dos números: `sem_contexto` responde a tudo e **alucina 100%** — nunca cita fonte
-> válida e ainda responde perguntas fora de domínio (deveria recusar). `rag_simples` já recusa
-> corretamente as 4 fora de domínio (recusa 1.00) e reduz a alucinação para 0.43, mas perde
-> acerto porque **malformata a citação** (copia `[c03] (fonte: …)` ou só o id `c10` em vez da
-> fonte limpa). `rag_agente` chega a **acerto 1.00 e alucinação 0.00**: a reformulação melhora
-> o recall, o limiar barra o fora de domínio e a **autoverificação ancora a `fonte`** no trecho
-> recuperado, eliminando a citação inválida. Prova a tese: a mesma LLM local **acerta mais e
-> alucina menos** com RAG + agente.
+O RAG melhorou o conteúdo e a recusa em relação ao modelo sem contexto.
+O agente melhorou a citação em relação ao RAG simples, com o mesmo acerto
+de conteúdo e a mesma taxa de recusa nessa rodada. Ainda houve duas
+citações de trechos que não sustentavam a resposta e uma resposta incompleta.
+A inspeção também encontrou um erro factual no caso `t09` do modelo sem contexto,
+mesmo tendo passado pelos padrões dos sintomas. Isso ilustra o limite da
+métrica automática.
+
+A busca sobre as perguntas originais obteve **recall@1 = 1,00** e
+**recall@3 = 1,00**. A similaridade do primeiro trecho variou de **0,872 a
+0,927** nas perguntas com gabarito e de **0,786 a 0,839** nas de recusa.
+Escolhemos **0,84** com base nessa amostra. O agente aplica o limiar após
+reformular a pergunta, e o efeito combinado aparece nas métricas de recusa.
+O conjunto é pequeno e foi usado para calibrar o limiar.
 
 ## 6. Os 5 erros (causa e correção)
 
-Casos reais extraídos de `avaliacao/erros.json` (20 erros registrados). Selecionamos 5 que
-cobrem os padrões distintos:
+Exemplos da execução de 18/11/2026. As respostas completas estão em `avaliacao/erros.json`.
 
-| # | Caso | Erro observado | Causa provável | Correção proposta |
-|---|---|---|---|---|
-| 1 | `sem_contexto` t03 — "Qual o telefone da Defesa Civil?" | Respondeu **188** (o correto é **199**), sem fonte | Sem base, o modelo "chuta" um número plausível | RAG traz o telefone correto da base e cita a fonte; limiar recusa quando não há suporte |
-| 2 | `sem_contexto` t10 — "Quais bairros o Alaga Alerta monitora?" | Inventou bairros (Jardins, Moema, Guarulhos) que **não** são monitorados | Modelo não conhece o escopo do projeto e alucina a lista | RAG recupera os bairros reais da base/camada Ouro |
-| 3 | `sem_contexto` t11 — "Previsão do tempo para o Rio de Janeiro amanhã?" | Respondeu em vez de **recusar** (pergunta fora de domínio) | Baseline não tem mecanismo de recusa | Limiar de busca < 0.84 → "não consta" (no `rag_agente` a recusa correta é 1.00) |
-| 4 | `rag_simples` t01 — "Carro preso na água?" | Conteúdo **correto**, mas citou `[c03] (fonte: Corpo de Bombeiros…)` — formato inválido → contabilizado como não-fundamentado | O modelo copia o rótulo do contexto em vez da fonte limpa | Passo de **autoverificação** do agente ancora a `fonte` no trecho recuperado |
-| 5 | `rag_simples` t04 — "O que é risco crítico?" | Citou só o id `c10` como fonte (inválida) e deu um limiar impreciso | Sem validação da citação após a geração | Autoverificação do agente substitui pela fonte real do top-1 recuperado |
+| Caso | Erro observado | Causa provável | Correção proposta |
+|---|---|---|---|
+| Sem contexto · `t01` | Sugeriu uma improvisação perigosa com um objeto entre o carro e a terra | Sem base, gerou instruções que não constam nas orientações | Recuperar o trecho oficial e validar a orientação antes de exibi-la |
+| Sem contexto · `t03` | Indicou **188** para a Defesa Civil, cujo telefone na base é **199** | Produziu um número sem uma referência | Usar o trecho de contatos e validar números de emergência antes de responder |
+| Sem contexto · `t05` | Deu a faixa de 200 a 300 mm por mês. O gabarito é de 10 até menos de 25 mm/h | O modelo desconhece a regra da camada Ouro histórica | Vincular limites e unidades ao trecho que descreve a regra |
+| RAG simples · `t01` | Devolveu o texto da fonte com o rótulo `[c03] (fonte: …)` | Copiou a linha de contexto para o campo de fonte | Pedir só o ID do trecho e converter esse ID na fonte pública, como faz o agente |
+| RAG com agente · `t05` | Acertou a faixa de chuva, mas citou orientações para grupos vulneráveis | O ID escolhido existia entre os trechos recuperados, mas não dava suporte aos números | Verificar se o trecho citado contém os valores e a unidade antes de retornar a resposta |
 
-> Observação: no `rag_simples` vários "erros" são de **citação malformatada**, não de conteúdo —
-> por isso o `rag_agente`, que valida e ancora a fonte, salta para acerto 1.00.
 
 ## 7. Conclusão técnica e links
 
+A comparação sustenta o uso da base de conhecimento e da verificação de
+citações. O principal ajuste seguinte é conferir se o trecho escolhido
+sustenta cada afirmação, especialmente números e orientações de emergência.
+O vídeo demonstra o projeto. O placar deste README corresponde à avaliação
+revisada após a gravação.
+
 - Repositório (este): https://github.com/gukawamura/alaga-genai
 - Repositório Big Data (Ouro que alimenta a base): https://github.com/gukawamura/alaga-big-data
+- MVP público: https://alaga-alerta-mvp.onrender.com/
 - Vídeo: https://youtu.be/qi57GOOAfyo
 
 ---
@@ -113,8 +135,8 @@ cobrem os padrões distintos:
 ```bash
 # 1. Ollama (LLM local)
 #    instale em https://ollama.com e baixe o modelo:
-ollama pull llama3.1:8b        # máquina modesta: ollama pull llama3.2:3b
-ollama serve                   # deixa o servidor em http://localhost:11434
+ollama pull llama3.2:3b
+ollama serve                   # se o Ollama ainda não estiver rodando
 
 # 2. Dependências Python
 pip install -r requirements.txt
@@ -126,14 +148,29 @@ python src/rag.py
 python avaliacao/avaliar.py
 
 # 5. Subir a API consumida pelo MVP
-uvicorn api.main:app --reload --port 8001
+uvicorn api.main:app --host 127.0.0.1 --port 8001
 #    POST http://localhost:8001/assistente  body: {"pergunta": "posso atravessar a rua alagada a pé?"}
 ```
 
-Para trocar o modelo sem mexer no código (Windows PowerShell):
+No terminal do MVP, configure a URL e o tempo de espera antes de iniciar a API
+central. Abra o chat na URL do MVP local. Em PowerShell:
 ```powershell
-$env:OLLAMA_MODEL = "llama3.2:3b"
+$env:ASSISTENTE_URL = "http://127.0.0.1:8001/assistente"
+$env:TIMEOUT_SERVICOS = "75"
 ```
+
+Uma resposta com `modo: "llm"` indica que a API central recebeu a saída do
+serviço GenAI. No teste de integração de 18/11/2026, enviamos duas perguntas
+à rota do MVP local. A pergunta sobre a Defesa Civil retornou **199** com
+fonte e `consta: true`. A pergunta sobre o Campeonato Brasileiro retornou
+**não consta**, sem fonte e com `consta: false`. As duas retornaram HTTP 200
+e `modo: "llm"`.
+
+O MVP público no Render atende com a base de contingência
+(`modo: "local"`). A avaliação usa Ollama na máquina local. A base contém
+um recorte estático dos bairros e limiares da Ouro histórica, com referência
+ao código de origem. Previsão vigente e alertas são consultados nas telas do
+MVP.
 
 ## Estrutura
 ```
